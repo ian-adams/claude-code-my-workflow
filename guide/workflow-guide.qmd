@@ -1,32 +1,7 @@
 ---
 title: "My Claude Code Setup"
 subtitle: "A Comprehensive Guide to Multi-Agent Slide Development, Code Review, and Research Automation"
-author: "Pedro H. C. Sant'Anna"
-date: "2026-02-06"
-format:
-  html:
-    toc: true
-    toc-depth: 3
-    toc-location: left
-    number-sections: true
-    theme:
-      - cosmo
-      - custom.scss
-    code-copy: true
-    code-overflow: wrap
-    highlight-style: github-dark
-    smooth-scroll: true
-    self-contained: true
-    link-external-newwindow: true
-    include-in-header:
-      text: |
-        <style>
-        :not(pre) > code { background-color: rgba(185,151,91,0.1) !important; color: #8b6914 !important; padding: 0.15em 0.45em !important; border-radius: 3px !important; font-size: 0.87em !important; }
-        pre code { background-color: transparent !important; color: inherit !important; padding: 0 !important; font-size: inherit !important; border-radius: 0 !important; }
-        body:not(.floating):not(.docked) .page-columns.toc-left {
-          grid-template-columns: [screen-start] 1.5em [screen-start-inset] 5fr [page-start] 35px [page-start-inset] minmax(0px,175px) [body-start-outset] 35px [body-start] 1.5em [body-content-start] minmax(450px,calc(1100px - 3em)) [body-content-end] 1.5em [body-end] 50px [body-end-outset] minmax(0px,200px) [page-end-inset] 35px [page-end] 5fr [screen-end-inset] 1.5em [screen-end] !important;
-        }
-        </style>
+date: "2026-02-07"
 ---
 
 # Why This Workflow Exists {#sec-why}
@@ -57,9 +32,9 @@ Claude Code is a **CLI tool** that runs on your computer with full access to you
 | Quality gates | Automated scoring --- nothing ships below 80/100 |
 
 ::: {.callout-tip}
-## Case Study: Econ 730 at Emory
+## Case Study: A PhD Course
 
-This workflow was developed over 6+ sessions building a PhD course on Causal Panel Data. The result: 6 complete lectures (140+ slides each), with Beamer + Quarto versions, interactive Plotly charts, TikZ diagrams, and R replication scripts --- all managed by the orchestrator and reviewed by 10 specialized agents across 5 quality dimensions.
+This workflow was developed over 6+ sessions building a PhD-level course. The result: 6 complete lectures (140+ slides each), with Beamer + Quarto versions, interactive Plotly charts, TikZ diagrams, and R replication scripts --- all managed by the orchestrator and reviewed by 10 specialized agents across 5 quality dimensions.
 :::
 
 ---
@@ -126,7 +101,7 @@ APPROVED   NEEDS WORK
 ::: {.callout-tip}
 ## Real Example
 
-In Econ 730 Lecture 6, the critic caught that the Quarto version used `\cdots` (a placeholder) where the Beamer version had the full Hajek weight formula. The fixer replaced it. On re-audit, the critic found 8 more instances of missing `(X)` arguments on outcome models. After 4 rounds, the Quarto slides matched the Beamer source exactly.
+In one lecture, the critic caught that the Quarto version used `\cdots` (a placeholder) where the Beamer version had the full Hajek weight formula. The fixer replaced it. On re-audit, the critic found 8 more instances of missing `(X)` arguments on outcome models. After 4 rounds, the Quarto slides matched the Beamer source exactly.
 :::
 
 ## The Orchestrator: Coordinating Agents Automatically
@@ -172,7 +147,7 @@ This means Claude **cannot** say "done" without actually compiling, rendering, o
 ::: {.callout-warning}
 ## Don't Disable the Stop Hook
 
-It's tempting to remove the hook for speed. Don't. In Econ 730, the hook caught unverified TikZ diagrams that would have deployed with overlapping labels, broken SVGs in Quarto slides that wouldn't display, and R scripts with missing intercept terms that produced silently wrong estimates.
+It's tempting to remove the hook for speed. Don't. In practice, the hook caught unverified TikZ diagrams that would have deployed with overlapping labels, broken SVGs in Quarto slides that wouldn't display, and R scripts with missing intercept terms that produced silently wrong estimates.
 :::
 
 ## Creating Your Own Domain Reviewer
@@ -287,8 +262,8 @@ Now that you have seen what the system does, here is how it is configured. Claud
 ```markdown
 # CLAUDE.MD --- My Course Development
 
-**Project:** Econ 730 --- Causal Panel Data
-**Institution:** Emory University
+**Project:** [Your Course Name]
+**Institution:** [Your University]
 
 ## Quick Reference
 | Command | What It Does |
@@ -816,7 +791,7 @@ Copy `.claude/agents/domain-reviewer.md` and customize the 5 lenses for your fie
 
 ## Step 3: Adapt Your Theme
 
-The template includes `emory-clean.scss` as an example Quarto theme. To customize:
+The template includes four Quarto slide themes: `emory-clean.scss`, `usc-clean.scss`, `uno-clean.scss`, and `academic-clean.scss` (a generic Charcoal/Teal theme). To customize, pick one as your starting point and:
 
 1. Change the color palette to your institution's colors
 2. Update CSS class names if needed
@@ -836,7 +811,7 @@ Then create `SKILL.md` with YAML frontmatter + step-by-step instructions.
 
 1. **Start with CLAUDE.md.** It's the foundation. Spend 30 minutes making it thorough.
 2. **Add rules incrementally.** Don't try to write all rules upfront. Add them when you discover patterns.
-3. **Use the [LEARN] format.** Every correction Pedro made was tagged and persisted. This prevents repeating mistakes.
+3. **Use the [LEARN] format.** Every correction was tagged and persisted. This prevents repeating mistakes.
 4. **Trust the adversarial pattern.** The critic-fixer loop catches things you won't. Let it run.
 5. **Verify everything.** The Stop hook exists for a reason. Never skip verification.
 6. **Session logs matter.** Document design decisions, not just what changed. Future-you will thank present-you.

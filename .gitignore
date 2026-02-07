@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.env
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.bbl
+*.blg
+*.nav
+*.out
+*.snm
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# OS files
+.DS_Store
+Thumbs.db

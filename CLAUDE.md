@@ -17,6 +17,8 @@
 
 ## Quick Reference: Available Skills & Agents
 
+### Slide Development & Quality
+
 | Command | What It Does |
 |---------|-------------|
 | `/compile-latex [filename]` | 3-pass XeLaTeX compilation with bibtex |
@@ -32,6 +34,39 @@
 | `/validate-bib` | Cross-reference citations vs bibliography file |
 | `/devils-advocate` | Challenge slide design with pedagogical questions |
 | `/create-lecture` | Full lecture creation workflow |
+
+### Research Lifecycle
+
+| Command | What It Does |
+|---------|-------------|
+| `/research-ideation [topic]` | Generate research questions using economic thinking frameworks |
+| `/lit-review-assistant [topic]` | Structure lit searches, summarize papers, generate BibTeX |
+| `/causal-hypothesis-architect [question]` | Formalize causal claims with DAGs and falsification criteria |
+| `/scientific-narrative-builder [question]` | Draft introductions using the Why-to-If-Then funnel |
+| `/academic-paper-writer [section]` | Draft paper sections with IMRAD structure and LaTeX templates |
+
+### Analysis & Data
+
+| Command | What It Does |
+|---------|-------------|
+| `/r-econometrics [method]` | IV, DiD, RDD, event studies in R with modern estimators |
+| `/python-econometrics [method]` | IV, DiD, RDD, panel in Python for cross-language verification |
+| `/api-data-fetcher [source]` | Fetch data from FRED, World Bank, Census, BLS APIs |
+| `/latex-tables [type]` | Publication-ready regression/summary tables in LaTeX |
+
+### Methods & Experimental Design
+
+| Command | What It Does |
+|---------|-------------|
+| `/transparent-methods-reporter [mode]` | Draft or audit methods sections against 19-item APSA checklist |
+| `/design-conjoint-expert [topic]` | Design conjoint experiments with power analysis and AMCE estimation |
+
+### Dev Tools
+
+| Command | What It Does |
+|---------|-------------|
+| `/commit-push-pr [message]` | Stage, commit, push, and create PR with pre-commit checks |
+| `/techdebt [path]` | Find technical debt across LaTeX, R, Quarto, Python, and config |
 
 **Agents** (available for delegation): `proofreader`, `slide-auditor`, `pedagogy-reviewer`, `r-reviewer`, `tikz-reviewer`, `beamer-translator`, `quarto-critic`, `quarto-fixer`, `verifier`, `domain-reviewer`
 
@@ -75,9 +110,13 @@ This repository is designed for multi-platform collaboration using:
 ├── docs/                              # GitHub Pages deployment (auto-generated)
 │   ├── index.html
 │   └── slides/
+├── data/                              # Project data (git-ignored for large files)
+│   ├── raw/                           # Unmodified API downloads & source data
+│   └── clean/                         # Processed data for analysis
 ├── scripts/                           # Utility scripts
 │   ├── sync_to_docs.sh               # Renders Quarto & syncs to docs/
-│   └── R/                             # R scripts for figures and analysis
+│   ├── R/                             # R scripts for figures and analysis
+│   └── replication/                   # Cross-language replication scripts (referee2)
 ├── quality_reports/                    # Review agent reports (auto-generated)
 │   ├── plans/                         # Saved implementation plans
 │   └── session_logs/                  # Session history and decision logs
@@ -285,6 +324,25 @@ TEXINPUTS=../Preambles:$TEXINPUTS xelatex -interaction=nonstopmode filename.tex
 ./scripts/sync_to_docs.sh              # All lectures
 ./scripts/sync_to_docs.sh Lecture2     # Specific lecture
 ```
+
+### Python Environment
+
+Python is used for data fetching (`/api-data-fetcher`), cross-language verification (`/python-econometrics`), and secondary analysis. R remains the primary analysis language.
+
+```bash
+# Create virtual environment
+python -m venv .venv
+source .venv/bin/activate  # Linux/Mac
+.venv\Scripts\activate     # Windows
+
+# Core econometrics packages
+pip install pyfixest linearmodels rdrobust statsmodels pandas numpy
+
+# Data fetching packages
+pip install fredapi wbdata requests
+```
+
+Ensure `.venv/` and `.env` are in `.gitignore`.
 
 ### Git Workflow
 
