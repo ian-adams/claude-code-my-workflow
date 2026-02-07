@@ -1,0 +1,164 @@
+---
+title: "Sample Slide Deck"
+subtitle: "Theme Preview & Feature Showcase"
+author: "Academic Author"
+institute: "Department of Economics"
+date: today
+format:
+  revealjs:
+    theme: ../../Quarto/academic-clean.scss
+    slide-number: true
+    self-contained: true
+    width: 1280
+    height: 720
+    transition: fade
+    highlight-style: github
+---
+
+## Bullet Points & Incremental Lists
+
+Standard bullet points:
+
+- First key concept in the lecture
+- Second important idea to convey
+  - Supporting detail with sub-bullet
+  - Another elaboration point
+- Third takeaway for students
+
+. . .
+
+**Incremental reveal** — this appears after a pause.
+
+## Ordered Lists & Text Formatting
+
+Steps in a research workflow:
+
+1. Formulate a testable hypothesis
+2. Identify an appropriate research design
+3. Collect and clean the data
+4. Estimate the model and run diagnostics
+5. Interpret results with caution
+
+Text styles: **bold**, *italic*, `inline code`, [hyperlink](#).
+
+Use [highlight classes]{.hi} for [emphasis]{.hi-gold} on [key terms]{.hi-green}.
+
+## Mathematics
+
+**Inline math:** The treatment effect is $\tau = E[Y_i(1) - Y_i(0)]$.
+
+**Display equations:**
+
+$$
+\hat{\beta}_{OLS} = (X'X)^{-1}X'Y
+$$
+
+**Aligned equations:**
+
+$$
+\begin{aligned}
+Y_i &= \alpha + \tau D_i + X_i'\beta + \varepsilon_i \\
+E[\varepsilon_i \mid D_i, X_i] &= 0
+\end{aligned}
+$$
+
+## Code Block
+
+```{r}
+#| eval: false
+#| echo: true
+
+# Difference-in-Differences estimation
+library(fixest)
+
+model <- feols(
+  outcome ~ treated:post | unit + time,
+  data = panel_data,
+  cluster = ~unit
+)
+
+summary(model)
+```
+
+## Two-Column Layout {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**Assumptions**
+
+1. Parallel trends
+2. No anticipation
+3. SUTVA
+4. Common support
+
+These are necessary for causal identification under the DiD framework.
+:::
+
+::: {.column width="50%"}
+**Diagnostics**
+
+- Pre-trend test (event study)
+- Placebo treatments
+- Sensitivity analysis
+- Robustness to controls
+
+Always validate assumptions before interpreting estimates.
+:::
+
+::::
+
+## Table
+
+| Estimator | Bias | Variance | MSE |
+|-----------|:----:|:--------:|:---:|
+| OLS       | Low  | Low      | Low |
+| IV        | None | High     | Med |
+| LASSO     | Med  | Low      | Low |
+| Matching  | Low  | Med      | Med |
+
+: Comparison of common estimators {.striped}
+
+## Box Environments
+
+::: {.keybox}
+**Key Result:** Under parallel trends, the DiD estimator is unbiased for the ATT.
+:::
+
+::: {.highlightbox}
+**Highlight:** This approach extends naturally to staggered adoption settings.
+:::
+
+::: {.methodbox}
+**Method:** Estimate using two-way fixed effects with clustered standard errors at the unit level.
+:::
+
+## More Box Environments {.smaller}
+
+::: {.assumptionbox}
+**Assumption (Parallel Trends):** In the absence of treatment, the average outcomes for treated and control groups would have followed the same trend over time.
+:::
+
+::: {.resultbox}
+**Result:** The estimated ATT is 0.15 (SE = 0.04), statistically significant at the 1% level.
+:::
+
+::: {.quotebox}
+The credibility revolution in economics has shifted the focus from identifying assumptions to research designs that make those assumptions more plausible.
+:::
+
+## Semantic Colors & Highlights
+
+Use semantic color classes for annotations:
+
+- [Identified]{.positive} — treatment effect is well-identified
+- [Biased]{.negative} — estimator suffers from omitted variable bias
+- [Reference category]{.neutral} — baseline comparison group
+
+Highlight classes for emphasis:
+
+- [Primary accent]{.hi}
+- [Gold accent]{.hi-gold}
+- [Yellow accent]{.hi-yellow}
+- [Green accent]{.hi-green}
+- [Red accent]{.hi-red}

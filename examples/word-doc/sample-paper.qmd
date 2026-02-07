@@ -1,0 +1,67 @@
+---
+title: "The Effect of Job Training on Labor Market Outcomes"
+subtitle: "A Randomized Evaluation"
+author:
+  - name: "Academic Author"
+    affiliation: "Department of Economics"
+date: today
+format:
+  docx:
+    number-sections: true
+bibliography: ../../Bibliography_base.bib
+abstract: |
+  This paper evaluates the causal effect of a job training program on participant earnings using a randomized controlled trial. We find that program participation increases annual earnings by approximately 15%, with larger effects for workers with less prior experience. Our results are robust to alternative specifications and consistent with estimates from instrumental variables analysis. These findings contribute to the growing evidence on the effectiveness of active labor market policies.
+---
+
+# Introduction
+
+Understanding the causal effect of job training programs on labor market outcomes is a central question in labor economics. While observational studies have produced mixed results, randomized evaluations offer a credible path to identification [@Angrist2009_mostly_harmless].
+
+The key challenge in evaluating training programs is selection bias: workers who choose to participate may differ systematically from those who do not. If these differences are correlated with potential outcomes, naive comparisons of participants and non-participants will yield biased estimates of the program's effect.
+
+We address this challenge using data from a randomized lottery that determined eligibility for a federally funded training program. Random assignment ensures that, in expectation, treatment and control groups are balanced on both observed and unobserved characteristics [@Imbens2004_nonparametric].
+
+# Empirical Framework
+
+## Identification Strategy
+
+Let $Y_i(1)$ and $Y_i(0)$ denote the potential outcomes for individual $i$ under treatment and control, respectively. The average treatment effect on the treated (ATT) is:
+
+$$
+\tau_{ATT} = E[Y_i(1) - Y_i(0) \mid D_i = 1]
+$$
+
+where $D_i \in \{0,1\}$ indicates actual program participation.
+
+## Estimation
+
+We estimate the following regression:
+
+$$
+Y_i = \alpha + \tau D_i + X_i'\beta + \varepsilon_i
+$$
+
+where $X_i$ is a vector of pre-treatment covariates including age, education, experience, and gender. Standard errors are clustered at the firm level.
+
+Because not all lottery winners enroll in training (non-compliance), we also estimate the local average treatment effect (LATE) using lottery assignment $Z_i$ as an instrument for $D_i$.
+
+# Results
+
+@tbl-results presents the main regression results across four specifications.
+
+| | (1) OLS | (2) OLS | (3) IV | (4) IV |
+|---|:---:|:---:|:---:|:---:|
+| Training | 0.152*** | 0.138*** | 0.237** | 0.219** |
+| | (0.041) | (0.039) | (0.097) | (0.092) |
+| Controls | No | Yes | No | Yes |
+| Observations | 5,000 | 5,000 | 5,000 | 5,000 |
+
+: Main regression results {#tbl-results}
+
+The OLS estimate in column (1) suggests that training increases log earnings by 0.152 log points, or roughly 16%. Adding controls in column (2) reduces this to 0.138, indicating modest selection on observables. The IV estimates in columns (3)-(4) are larger, consistent with a LATE that exceeds the ATE when compliers have above-average returns to training.
+
+# Conclusion
+
+Our randomized evaluation provides credible evidence that job training programs can meaningfully improve participant earnings. The estimated effects are economically significant and robust to alternative specifications.
+
+# References
