@@ -129,13 +129,28 @@ If starting a new session (or after heavy compression):
 
 ---
 
-## Rule 4: Continuous Learning with [LEARN] Tags
+## Rule 4: Tiered Learning with [LEARN] Tags
 
-**When a mistake is corrected, immediately save a `[LEARN:tag]` entry to MEMORY.md.**
+Lessons come in two tiers, depending on where the knowledge belongs.
+
+### Tier 1 — MEMORY.md (automatic, no approval needed)
+
+When a mistake is corrected, immediately save a `[LEARN:tag]` entry to `MEMORY.md`.
 
 Format: `[LEARN:category] Incorrect assumption → correct fact`
 
-Common categories: `notation`, `citation`, `r-code`, `workflow`, `latex`. Add a tag whenever the user corrects a factual claim, a compilation error reveals a wrong assumption, or a review agent catches a systematic error. These persist across sessions and prevent repeating the same mistake.
+Common categories: `notation`, `citation`, `r-code`, `workflow`, `latex`. Trigger: user correction, compilation error revealing a wrong assumption, or review agent catching a systematic error. These are low-risk, ephemeral, and personal to this project instance.
+
+### Tier 2 — Skills/Rules/Agents (propose and ask)
+
+When a lesson is significant enough to improve a file in `.claude/skills/`, `.claude/rules/`, or `.claude/agents/`:
+
+1. **Identify** the specific file and section that should change
+2. **Draft** the proposed edit (show old text → new text)
+3. **Ask** the user: *"This lesson could improve `[file]`. Here's the proposed change: [diff]. Should I apply it?"*
+4. **Apply only after explicit approval**
+
+Examples: adding an R package gotcha to a conventions rule, adding a new pitfall to a skill's "Common Pitfalls" section, correcting a workflow step in an agent prompt. Tier 2 changes are higher-impact and persist across all projects using this template, so they require human review.
 
 ---
 

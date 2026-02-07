@@ -8,7 +8,7 @@ format:
     toc-depth: 3
     toc-location: left
     number-sections: true
-    theme: cosmo
+    theme: [cosmo, custom.scss]
     code-copy: true
     code-overflow: wrap
     highlight-style: github
