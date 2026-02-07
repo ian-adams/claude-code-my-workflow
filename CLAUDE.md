@@ -44,6 +44,7 @@
 | `/causal-hypothesis-architect [question]` | Formalize causal claims with DAGs and falsification criteria |
 | `/scientific-narrative-builder [question]` | Draft introductions using the Why-to-If-Then funnel |
 | `/academic-paper-writer [section]` | Draft paper sections with IMRAD structure and LaTeX templates |
+| `/policing-research-style [section]` | Apply data-forward narrative style to academic prose (final polish step) |
 
 ### Analysis & Data
 
