@@ -1,0 +1,211 @@
+\documentclass[aspectratio=169, 11pt]{beamer}
+
+% ==============================================================================
+% Self-contained Beamer example — no external Preambles/ dependency
+% ==============================================================================
+
+\usetheme{metropolis}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+
+% --- Colors ---
+\definecolor{primaryblue}{HTML}{2C3E50}
+\definecolor{primarygold}{HTML}{D4A843}
+\definecolor{highlightyellow}{HTML}{F39C12}
+\definecolor{lightbg}{HTML}{F2F1EF}
+\definecolor{methodblue}{HTML}{34495E}
+
+\setbeamercolor{frametitle}{bg=primaryblue, fg=white}
+\setbeamercolor{title}{fg=primaryblue}
+\setbeamercolor{subtitle}{fg=primarygold}
+\setbeamercolor{structure}{fg=primaryblue}
+\setbeamercolor{itemize item}{fg=primaryblue}
+\setbeamercolor{itemize subitem}{fg=primarygold}
+
+% --- Custom Environments ---
+\newenvironment{keybox}{%
+  \begin{tcolorbox}[colback=primarygold!12, colframe=primarygold,
+    leftrule=4pt, rightrule=0pt, toprule=0pt, bottomrule=0pt,
+    arc=3pt, boxrule=0pt]
+}{%
+  \end{tcolorbox}
+}
+
+\newenvironment{highlightbox}{%
+  \begin{tcolorbox}[colback=highlightyellow!8, colframe=highlightyellow,
+    leftrule=4pt, rightrule=0pt, toprule=0pt, bottomrule=0pt,
+    arc=3pt, boxrule=0pt]
+}{%
+  \end{tcolorbox}
+}
+
+\newenvironment{methodbox}{%
+  \begin{tcolorbox}[colback=primaryblue!6, colframe=primaryblue,
+    leftrule=4pt, rightrule=0pt, toprule=0pt, bottomrule=0pt,
+    arc=3pt, boxrule=0pt]
+}{%
+  \end{tcolorbox}
+}
+
+\newtcolorbox{definitionbox}[1][]{%
+  colback=white, colframe=primaryblue,
+  arc=3pt, boxrule=1.5pt,
+  title={\textbf{#1}},
+  coltitle=primaryblue, fonttitle=\bfseries,
+  attach boxed title to top left={yshift=-2mm, xshift=5mm},
+  boxed title style={colback=white, colframe=white},
+  nobeforeafter
+}
+
+% --- Metadata ---
+\title{Sample Beamer Deck}
+\subtitle{Custom Environment Showcase}
+\author{Academic Author}
+\institute{Department of Economics}
+\date{\today}
+
+\begin{document}
+
+% ==============================================================================
+\begin{frame}
+\titlepage
+\end{frame}
+
+% ==============================================================================
+\begin{frame}{Itemize and Enumerate}
+
+Key concepts in causal inference:
+
+\begin{itemize}
+  \item \textbf{Potential outcomes framework} --- each unit has outcomes under treatment and control
+  \item \textbf{Fundamental problem} --- we only observe one potential outcome per unit
+    \begin{itemize}
+      \item Selection bias arises when treatment is not randomly assigned
+      \item Randomization solves this by balancing confounders in expectation
+    \end{itemize}
+  \item \textbf{Identification strategies} --- exploit natural variation or design
+\end{itemize}
+
+\vfill
+
+\begin{enumerate}
+  \item Formulate a research question
+  \item Identify a credible source of variation
+  \item Estimate and interpret with care
+\end{enumerate}
+
+\end{frame}
+
+% ==============================================================================
+\begin{frame}{Mathematics}
+
+\textbf{Theorem (Frisch--Waugh--Lovell).}
+Consider the regression $Y = X_1 \beta_1 + X_2 \beta_2 + \varepsilon$. Then $\hat{\beta}_1$ can be obtained by:
+
+$$
+\hat{\beta}_1 = (X_1' M_2 X_1)^{-1} X_1' M_2 Y
+$$
+
+where $M_2 = I - X_2(X_2'X_2)^{-1}X_2'$ is the annihilator matrix.
+
+\vspace{0.5em}
+
+\textit{Proof sketch.} Partial out $X_2$ from both $Y$ and $X_1$, then run OLS on the residuals. The coefficient on the residualized $X_1$ equals $\hat{\beta}_1$. \qed
+
+\end{frame}
+
+% ==============================================================================
+\begin{frame}{Custom Box Environments}
+
+\begin{keybox}
+\textbf{Key Result:} Under parallel trends, the DiD estimator is unbiased for the ATT with $\hat{\tau} = (\bar{Y}_{T,post} - \bar{Y}_{T,pre}) - (\bar{Y}_{C,post} - \bar{Y}_{C,pre})$.
+\end{keybox}
+
+\begin{highlightbox}
+\textbf{Highlight:} Staggered adoption requires heterogeneity-robust estimators such as Callaway and Sant'Anna (2021).
+\end{highlightbox}
+
+\begin{methodbox}
+\textbf{Method:} Estimate using TWFE with standard errors clustered at the state level. Use 50 bootstrap replications for inference.
+\end{methodbox}
+
+\end{frame}
+
+% ==============================================================================
+\begin{frame}{Definition Box}
+
+\begin{definitionbox}[Average Treatment Effect]
+The \textbf{ATE} is defined as:
+$$
+\tau_{ATE} = E[Y_i(1) - Y_i(0)]
+$$
+where $Y_i(1)$ and $Y_i(0)$ are the potential outcomes under treatment and control, respectively.
+\end{definitionbox}
+
+\vspace{0.5em}
+
+\begin{definitionbox}[Average Treatment Effect on the Treated]
+The \textbf{ATT} conditions on receiving treatment:
+$$
+\tau_{ATT} = E[Y_i(1) - Y_i(0) \mid D_i = 1]
+$$
+\end{definitionbox}
+
+\end{frame}
+
+% ==============================================================================
+\begin{frame}{Table}
+
+\begin{table}
+\centering
+\caption{Regression Results}
+\begin{tabular}{lcc}
+\toprule
+ & (1) OLS & (2) IV \\
+\midrule
+Treatment    & 0.152***  & 0.238** \\
+             & (0.041)   & (0.097) \\
+Controls     & Yes       & Yes     \\
+Fixed Effects & Unit, Time & Unit, Time \\
+\midrule
+Observations & 5{,}000   & 5{,}000 \\
+$R^2$        & 0.43      & ---     \\
+F-stat (1st) & ---       & 24.7    \\
+\bottomrule
+\multicolumn{3}{l}{\footnotesize $^{***}p<0.01$, $^{**}p<0.05$, $^{*}p<0.1$. SEs clustered by unit.}
+\end{tabular}
+\end{table}
+
+\end{frame}
+
+% ==============================================================================
+\begin{frame}{Two-Column Layout}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Advantages of DiD}
+\begin{itemize}
+  \item Intuitive and transparent
+  \item Controls for time-invariant confounders
+  \item Works with observational data
+  \item Widely applicable
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{Limitations}
+\begin{itemize}
+  \item Requires parallel trends
+  \item Sensitive to functional form
+  \item Cannot handle time-varying confounders
+  \item Staggered timing complications
+\end{itemize}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\end{document}
