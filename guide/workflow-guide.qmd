@@ -238,6 +238,44 @@ Add any additional tools you use (e.g., `python3`, `julia`, `pandoc`).
 python scripts/quality_score.py Quarto/MyFile.qmd
 ```
 
+## Staying in Sync with the Template
+
+If you forked this template (rather than cloning fresh), you can pull improvements from the upstream template as they are released.
+
+### Setup
+
+Point `upstream` at the template repo you forked from:
+
+```bash
+git remote add upstream https://github.com/ian-adams/claude-code-my-workflow.git
+```
+
+### Checking for Updates
+
+The `/sync-upstream` skill handles this. In check mode (the default), it fetches upstream, lists new commits, and categorizes changes into **infrastructure** (skills, agents, rules, scripts --- safe to merge) and **project content** (CLAUDE.md, slides, data --- likely to conflict in customized projects).
+
+```
+/sync-upstream
+```
+
+A session-startup rule also checks automatically: if upstream has new commits, Claude will mention it when you start a session.
+
+### Merging Updates
+
+When you are ready to merge:
+
+```
+/sync-upstream --apply
+```
+
+This creates a `sync-upstream-YYYY-MM-DD` branch, merges upstream changes, and opens a PR against your repo. If there are merge conflicts, the skill stops and advises on resolution --- infrastructure conflicts can usually accept the upstream version, while project content conflicts need manual resolution.
+
+::: {.callout-tip}
+## Infrastructure vs. Project Content
+
+Infrastructure files (`.claude/skills/`, `.claude/agents/`, `.claude/rules/`, `scripts/`) are designed to merge cleanly because they add new capabilities without touching your customizations. Project content (`CLAUDE.md`, `Slides/`, `Quarto/`) will almost always conflict in a customized project --- and that is expected. Resolve these manually.
+:::
+
 ---
 
 # The Building Blocks {#sec-blocks}
@@ -343,6 +381,7 @@ argument-hint: "[filename without .tex extension]"
 | `/slide-excellence` | Full multi-agent review | Before major milestones |
 | `/create-lecture` | New lecture from scratch | Starting a new topic |
 | `/commit` | Stage, commit, PR, merge | After any completed task |
+| `/sync-upstream` | Check/merge upstream template changes | After template repo updates |
 
 ## Agents --- Specialized Reviewers
 
@@ -932,6 +971,7 @@ Then create `SKILL.md` with YAML frontmatter + step-by-step instructions.
 | `/devils-advocate` | `.claude/skills/devils-advocate/` | Design challenge questions |
 | `/create-lecture` | `.claude/skills/create-lecture/` | Full lecture creation |
 | `/commit` | `.claude/skills/commit/` | Stage, commit, PR, merge cycle |
+| `/sync-upstream` | `.claude/skills/sync-upstream/` | Check/merge upstream template changes |
 
 ## All Rules
 
@@ -950,6 +990,7 @@ Then create `SKILL.md` with YAML frontmatter + step-by-step instructions.
 | Knowledge Base | `.claude/rules/knowledge-base-template.md` | Domain notation template |
 | Plan-First Workflow | `.claude/rules/plan-first-workflow.md` | Plan mode, plan saving, context preservation, session logging |
 | Orchestrator Protocol | `.claude/rules/orchestrator-protocol.md` | Contractor mode: autonomous implement-verify-review-fix loop |
+| Upstream Sync Reminder | `.claude/rules/upstream-sync-reminder.md` | Check for upstream changes at session startup |
 
 ## Hooks
 

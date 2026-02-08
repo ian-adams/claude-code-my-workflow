@@ -71,6 +71,7 @@
 |---------|-------------|
 | `/commit [message]` | Stage, commit, push, PR, merge — full git cycle |
 | `/techdebt [path]` | Find technical debt across LaTeX, R, Quarto, Python, and config |
+| `/sync-upstream [--check/--apply]` | Check and merge changes from upstream template repo |
 
 **Agents** (available for delegation): `proofreader`, `slide-auditor`, `pedagogy-reviewer`, `r-reviewer`, `tikz-reviewer`, `beamer-translator`, `quarto-critic`, `quarto-fixer`, `verifier`, `domain-reviewer`
 
@@ -354,6 +355,20 @@ Ensure `.venv/` and `.env` are in `.gitignore`.
 - Commit regularly with descriptive messages
 - Use PRs for significant changes
 - Run proofreading before every PR
+
+### Forking This Template into a New Project
+
+If you fork this template into a project-specific repo (e.g., "econ-730", "policing-research"):
+
+1. Fork or clone this repo into your new project
+2. Set `upstream` to point at the template:
+   ```bash
+   git remote add upstream https://github.com/ian-adams/claude-code-my-workflow.git
+   ```
+3. Customize `CLAUDE.md`, knowledge base, and theme for your project
+4. The `/sync-upstream` skill is inherited — use it to pull template improvements
+5. **Infrastructure files** (`.claude/skills/`, `agents/`, `rules/`, `scripts/`) merge cleanly
+6. **Project content** (`CLAUDE.md`, `Slides/`, `Quarto/`) will conflict — resolve manually
 
 ---
 
