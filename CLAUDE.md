@@ -41,6 +41,9 @@
 |---------|-------------|
 | `/research-ideation [topic]` | Generate research questions using economic thinking frameworks |
 | `/lit-review-assistant [topic]` | Structure lit searches, summarize papers, generate BibTeX |
+| `/lit-search [topic]` | Systematic OpenAlex API search with screening, snowballing, and annotation |
+| `/lit-synthesis [corpus]` | Deep reading, theoretical mapping, and debate identification from literature corpus |
+| `/lit-writeup [contribution type]` | Draft Theory/Literature Review sections with cluster-based architecture |
 | `/causal-hypothesis-architect [question]` | Formalize causal claims with DAGs and falsification criteria |
 | `/scientific-narrative-builder [question]` | Draft introductions using the Why-to-If-Then funnel |
 | `/academic-paper-writer [section]` | Draft paper sections with IMRAD structure and LaTeX templates |

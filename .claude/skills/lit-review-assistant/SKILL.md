@@ -93,6 +93,18 @@ Conduct structured literature reviews: search, summarize, synthesize, and identi
 3. Check backward citations (their references)
 4. Identify clusters of related work
 
+## Proactive Tools: The Lit Trilogy
+
+This skill provides **quick-start guidance** for literature reviews. For deeper, automated workflows, use the Lit Trilogy:
+
+| Skill | What It Does | When to Use Instead |
+|-------|-------------|---------------------|
+| `/lit-search [topic]` | Systematic OpenAlex API search with screening, snowballing, and annotation | You need to build a corpus from scratch with API-powered searching |
+| `/lit-synthesis [corpus]` | Deep reading, theoretical mapping, and debate identification | You have papers and need to understand the field structure before writing |
+| `/lit-writeup [contribution type]` | Draft Theory/Literature Review sections with cluster-based architecture | You're ready to write and need structured prose with calibrated norms |
+
+**This skill** is best for quick guidance, manual search strategies, and paper-by-paper summaries. The trilogy is for when you need depth and automation.
+
 ## Best Practices
 
 1. Use reference managers (Zotero, BibDesk) alongside this skill
